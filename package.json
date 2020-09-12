@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder -mw"
+    "build": "electron-builder -m"
   },
   "devDependencies": {
     "electron": "^10.1.1",
