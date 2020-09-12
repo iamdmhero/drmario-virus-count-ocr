@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Dr. Mario (NES) virus count OCR",
   "main": "main.js",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/iamdmhero/drmario-virus-count-ocr.git"
+  },
   "scripts": {
     "start": "electron .",
     "build": "electron-builder -m -p always"
