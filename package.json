@@ -1,22 +1,18 @@
 {
-  "name": "electron-quick-start",
+  "name": "drmario-virus-count-ocr",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Dr. Mario (NES) virus count OCR",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder -mw"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^10.1.1"
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0",
+    "electron-reload": "^1.5.0"
+  },
+  "build": {
+    "appId": "io.drmar.virus-count-ocr"
   }
 }

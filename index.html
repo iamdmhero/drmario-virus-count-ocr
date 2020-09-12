@@ -1,19 +1,151 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <meta charset="UTF-8" />
+    <title>DM</title>
+    <script defer src="renderer.js"></script>
+    <style>
+      @font-face {
+        font-family: "Gotham Black";
+        src: url("Gotham Black Regular.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "Roboto";
+        src: url("Roboto-Regular.ttf") format("truetype");
+      }
+      body {
+        font-family: "Roboto";
+      }
+      video {
+        display: none;
+      }
+      #output {
+        font-family: "Gotham Black";
+        font-size: 64px;
+        margin: 0;
+      }
+      #output .player {
+        display: flex;
+      }
+      #input {
+        position: relative;
+      }
+      #input .crop-canvas {
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
+
+      .digit-crop-container,
+      .digit-crop {
+        align-items: center;
+        display: flex;
+      }
+      .digit-crop-middle {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+      .digit-crop-container input {
+        width: 60px;
+      }
+      .digit-output canvas {
+        border-width: 2px;
+        border-style: dashed;
+      }
+      #digit-crop-p1-d0 canvas {
+        border-color: #f00;
+      }
+      #digit-crop-p1-d1 canvas {
+        border-color: #0f0;
+      }
+      #digit-crop-p2-d0 canvas {
+        border-color: #00f;
+      }
+      #digit-crop-p2-d1 canvas {
+        border-color: #c0c;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <div id="output">
+      <div class="player">
+        <div id="output-p1-d0"></div>
+        <div id="output-p1-d1"></div>
+      </div>
+      <div class="player">
+        <div id="output-p2-d0"></div>
+        <div id="output-p2-d1"></div>
+      </div>
+    </div>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+    <div id="input">
+      <video></video>
+      <canvas id="video-canvas"></canvas>
+      <canvas id="crop-canvas-p1-d0" class="crop-canvas"></canvas>
+      <canvas id="crop-canvas-p1-d1" class="crop-canvas"></canvas>
+      <canvas id="crop-canvas-p2-d0" class="crop-canvas"></canvas>
+      <canvas id="crop-canvas-p2-d1" class="crop-canvas"></canvas>
+    </div>
+
+    <hr />
+
+    Threshold: <input type="number" id="threshold" value="95" min="0" max="255" /><br />
+
+    <h2>Player 1</h2>
+    <div class="digit-crop-container">
+      <div class="digit-crop" id="digit-crop-p1-d0">
+        <div>Left: <input type="number" class="left-crop" value="849" /></div>
+        <div class="digit-crop-middle">
+          <div>Top: <input type="number" class="top-crop" value="770" /></div>
+          <div class="digit-output">
+            <canvas></canvas>
+          </div>
+          <div>Bottom: <input type="number" class="bottom-crop" value="242" /></div>
+        </div>
+        <div>Right: <input type="number" class="right-crop" value="1042" /></div>
+      </div>
+      <div class="digit-crop" id="digit-crop-p1-d1">
+        <div>Left: <input type="number" class="left-crop" value="878" /></div>
+        <div class="digit-crop-middle">
+          <div>Top: <input type="number" class="top-crop" value="770" /></div>
+          <div class="digit-output">
+            <canvas></canvas>
+          </div>
+          <div>Bottom: <input type="number" class="bottom-crop" value="242" /></div>
+        </div>
+        <div>Right: <input type="number" class="right-crop" value="1013" /></div>
+      </div>
+    </div>
+
+    <h2>Player 2</h2>
+    <div class="digit-crop-container">
+      <div class="digit-crop" id="digit-crop-p2-d0">
+        <div>Left: <input type="number" class="left-crop" value="925" /></div>
+        <div class="digit-crop-middle">
+          <div>Top: <input type="number" class="top-crop" value="770" /></div>
+          <div class="digit-output">
+            <canvas></canvas>
+          </div>
+          <div>Bottom: <input type="number" class="bottom-crop" value="242" /></div>
+        </div>
+        <div>Right: <input type="number" class="right-crop" value="967" /></div>
+      </div>
+      <div class="digit-crop" id="digit-crop-p2-d1">
+        <div>Left: <input type="number" class="left-crop" value="953" /></div>
+        <div class="digit-crop-middle">
+          <div>Top: <input type="number" class="top-crop" value="770" /></div>
+          <div class="digit-output">
+            <canvas></canvas>
+          </div>
+          <div>Bottom: <input type="number" class="bottom-crop" value="242" /></div>
+        </div>
+        <div>Right: <input type="number" class="right-crop" value="937" /></div>
+      </div>
+    </div>
+    
+    <button id="video-select-btn">
+      Choose a Video Source
+    </button>
   </body>
 </html>
